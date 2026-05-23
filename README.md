@@ -113,8 +113,11 @@ npm install
 Copia el archivo `.env.example` o crea un archivo `.env` en la raíz con tus variables locales:
 ```env
 # Configuración Supabase
-SUPABASE_URL=tu_url_de_supabase
-SUPABASE_KEY=tu_anon_key_de_supabase
+SUPABASE_URL=tu_url_base_de_supabase
+SUPABASE_ANON_KEY=tu_anon_key_de_supabase
+
+# Respaldo temporal durante el prototipo
+# SUPABASE_KEY=tu_anon_key_de_supabase
 
 # Configuración de OpenAI
 OPENAI_API_KEY=tu_api_key_de_openai
@@ -131,6 +134,8 @@ npx nx run-many -t serve
 > **💡 Opciones útiles de Nx:**
 > - Levantar solo un proyecto: `npx nx serve frontend` o `npx nx serve backend`
 > - Correr todos los tests: `npx nx run-many -t test`
+
+> **🧪 Prototipo actual:** el backend expone `GET /api/status` y `POST /api/initiatives/synthesize`, y la pantalla inicial ya sintetiza ideas en local mientras llega la key real de Supabase.
 
 ---
 
