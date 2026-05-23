@@ -1,26 +1,31 @@
-import Link from 'next/link';
+import { InfoPageShell } from '../../components/info-page-shell';
 
 export default function LegalPage() {
   return (
-    <main className="min-h-screen bg-background px-container-padding py-12 text-on-background md:px-8">
-      <section className="mx-auto max-w-4xl rounded-[24px] border border-outline-variant/30 bg-surface-container-lowest p-8 shadow-sm md:p-12">
-        <p className="text-label-md font-label-md uppercase tracking-[0.18em] text-secondary">Aviso Legal</p>
-        <h1 className="mt-3 text-headline-lg font-headline-lg text-primary">Información legal de la plataforma</h1>
-        <p className="mt-4 text-body-lg font-body-lg text-on-surface-variant">
-          LánZate facilita participación ciudadana, gestión de iniciativas y validación de propuestas. El contenido publicado por usuarios y organizaciones es responsabilidad de sus autores.
-        </p>
-        <p className="mt-4 text-body-md font-body-md text-on-surface-variant">
-          Esta vista completa el flujo para los enlaces del pie de página y sirve como referencia básica de uso.
-        </p>
-        <div className="mt-8 flex flex-wrap gap-3">
-          <Link className="rounded-full bg-primary px-5 py-3 text-label-lg font-label-lg text-on-primary" href="/">
-            Volver al inicio
-          </Link>
-          <Link className="rounded-full border border-outline-variant px-5 py-3 text-label-lg font-label-lg text-on-surface-variant" href="/privacidad">
-            Privacidad
-          </Link>
-        </div>
-      </section>
-    </main>
+    <InfoPageShell
+      ctas={[
+        { href: '/', label: 'Volver al inicio' },
+        { href: '/privacidad', label: 'Ir a privacidad', variant: 'secondary' },
+      ]}
+      description="LánZate facilita participación ciudadana, gestión de iniciativas y validación de propuestas. El contenido publicado por usuarios y organizaciones es responsabilidad de sus autores."
+      eyebrow="Aviso legal"
+      title="Información legal de la plataforma"
+    >
+      <div className="grid gap-4 md:grid-cols-3">
+        {[
+          ['Uso responsable', 'Evita publicar contenido engañoso, ofensivo o fuera de contexto.'],
+          ['Autoría', 'Las iniciativas y comentarios pertenecen a sus autores y moderadores.'],
+          ['Cobertura', 'Esta vista completa el recorrido de enlaces legales del producto.'],
+        ].map(([title, text]) => (
+          <article key={title} className="rounded-2xl border border-outline-variant/20 bg-surface-container p-5">
+            <p className="text-label-lg font-label-lg font-bold text-primary">{title}</p>
+            <p className="mt-2 text-body-md text-on-surface-variant">{text}</p>
+          </article>
+        ))}
+      </div>
+      <div className="rounded-2xl border border-outline-variant/20 bg-primary/5 p-5 text-body-md text-on-surface-variant">
+        Si necesitas revisar el recorrido completo del producto, vuelve al inicio o continúa hacia las vistas públicas y el flujo autenticado.
+      </div>
+    </InfoPageShell>
   );
 }

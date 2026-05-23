@@ -14,11 +14,16 @@ async function bootstrap() {
   await app.get(TrpcRouter).applyMiddleware(app);
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
-  const port = process.env.PORT || 3334;
-  await app.listen(port);
-  Logger.log(
-    `🚀 Application is running on: http://localhost:${port}/${globalPrefix}`,
-  );
+  const port = process.env.API_PORT || process.env.PORT || 3333;
+  try {
+    await app.listen(port);
+    Logger.log(
+      `🚀 Application is running on: http://localhost:${port}/${globalPrefix}`,
+    );
+  } catch (error) {
+    Logger.error(`Error listening on port ${port}`, error);
+    process.exit(1);
+  }
 }
 
 bootstrap();
