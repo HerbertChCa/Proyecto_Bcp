@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
-import { synthesizeInitiativeProposal } from '@proyecto-bcp/shared-api';
 import { AppService } from './app.service';
+import { AiSynthesisService } from './ai-synthesis/ai-synthesis.service';
 import { SupabaseService } from './supabase/supabase.service';
 
 @Controller()
@@ -8,6 +8,7 @@ export class AppController {
   constructor(
     private readonly appService: AppService,
     private readonly supabaseService: SupabaseService,
+    private readonly aiSynthesisService: AiSynthesisService,
   ) {}
 
   @Get()
@@ -25,6 +26,6 @@ export class AppController {
 
   @Post('initiatives/synthesize')
   synthesizeInitiative(@Body() body: { idea: string }) {
-    return synthesizeInitiativeProposal(body.idea || '');
+    return this.aiSynthesisService.synthesizePendingIdeas([body.idea || '']);
   }
 }

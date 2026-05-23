@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
 @Injectable()
@@ -6,20 +7,29 @@ export class SupabaseService {
   private supabase: SupabaseClient | null = null;
   private readonly configured: boolean;
 
-  constructor() {
+  constructor(private readonly configService: ConfigService) {
     const supabaseUrl = this.normalizeUrl(
-      process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || '',
+      this.configService.get<string>('SUPABASE_URL') ||
+        this.configService.get<string>('NEXT_PUBLIC_SUPABASE_URL') ||
+        '',
     );
     const supabaseKey =
-      process.env.SUPABASE_ANON_KEY ||
-      process.env.SUPABASE_KEY ||
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+      this.configService.get<string>('SUPABASE_SERVICE_ROLE_KEY') ||
+      this.configService.get<string>('SUPABASE_KEY') ||
+      this.configService.get<string>('SUPABASE_ANON_KEY') ||
+      this.configService.get<string>('NEXT_PUBLIC_SUPABASE_ANON_KEY') ||
       '';
 
     this.configured = Boolean(supabaseUrl && supabaseKey);
 
     if (this.configured) {
-      this.supabase = createClient(supabaseUrl, supabaseKey);
+      this.supabase = createClient(supabaseUrl, supabaseKey, {
+        auth: {
+          autoRefreshToken: false,
+          persistSession: false,
+          detectSessionInUrl: false,
+        },
+      });
     }
   }
 

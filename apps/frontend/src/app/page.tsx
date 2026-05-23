@@ -1,230 +1,141 @@
-'use client';
+import Link from 'next/link';
 
-import { useState } from 'react';
-import { synthesizeInitiativeProposal } from '@proyecto-bcp/shared-api';
-
-const DEFAULT_IDEA =
-  'Queremos organizar talleres de reciclaje y limpieza en el barrio, con apoyo de jovenes voluntarios y vecinos, para ordenar los espacios publicos y crear una red de participacion constante.';
-
-const featureCards = [
-  {
-    title: 'Entrada libre',
-    body: 'El usuario escribe su idea en lenguaje natural y la IA la ordena en un formato util.',
-  },
-  {
-    title: 'Salida estructurada',
-    body: 'La propuesta se convierte en objetivo, publico, actividades, requisitos e impacto.',
-  },
-  {
-    title: 'Lista para Supabase',
-    body: 'Mas adelante este mismo resultado podra persistirse como iniciativa real en la base de datos.',
-  },
-];
-
-export default function Index() {
-  const [idea, setIdea] = useState(DEFAULT_IDEA);
-
-  const draft = synthesizeInitiativeProposal(idea);
-
+export default function HomePage() {
   return (
-    <main className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(15,23,42,0.96),_rgba(15,23,42,0.86)_42%,_rgba(2,6,23,1)_100%)] px-6 py-10 text-slate-50 sm:px-10 lg:px-12">
-      <div className="mx-auto flex max-w-7xl flex-col gap-8">
-        <section className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 shadow-2xl shadow-black/30 backdrop-blur-xl">
-          <div className="grid gap-0 lg:grid-cols-[1.15fr_0.85fr]">
-            <div className="p-8 sm:p-10 lg:p-12">
-              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-200">
-                Prototipo vivo
-                <span className="h-2 w-2 rounded-full bg-emerald-300" />
+    <div className="bg-background text-on-background font-body-md min-h-screen flex text-body-md antialiased">
+      <div className="w-full flex flex-col min-h-screen relative">
+        <header className="flex justify-between items-center w-full px-container-padding py-4 bg-surface/80 backdrop-blur-md shadow-sm sticky top-0 z-40">
+          <div className="flex items-center gap-8">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-on-primary">
+                <span className="material-symbols-outlined">lightbulb</span>
               </div>
-              <h1 className="max-w-3xl text-4xl font-semibold tracking-tight text-white sm:text-5xl lg:text-6xl">
-                Iniciativas comunitarias que la IA convierte en propuestas claras.
-              </h1>
-              <p className="mt-5 max-w-2xl text-base leading-7 text-slate-300 sm:text-lg">
-                El flujo arranca con una idea libre del usuario. La sintetizamos en una ficha
-                utilizable para luego guardarla, filtrarla y vincularla con Supabase cuando la
-                clave ya este lista.
-              </p>
-              <div className="mt-8 grid gap-4 sm:grid-cols-3">
-                {featureCards.map((card) => (
-                  <article
-                    key={card.title}
-                    className="rounded-2xl border border-white/10 bg-slate-950/40 p-4"
-                  >
-                    <h2 className="text-sm font-semibold text-white">{card.title}</h2>
-                    <p className="mt-2 text-sm leading-6 text-slate-300">{card.body}</p>
-                  </article>
-                ))}
-              </div>
+              <div className="text-title-lg font-title-lg font-bold text-primary">LánZate</div>
             </div>
-
-            <aside className="border-t border-white/10 bg-slate-950/40 p-8 sm:p-10 lg:border-l lg:border-t-0">
-              <div className="flex h-full flex-col justify-between gap-6">
-                <div>
-                  <p className="text-sm font-semibold uppercase tracking-[0.18em] text-amber-200">
-                    Motor de síntesis
-                  </p>
-                  <h2 className="mt-3 text-2xl font-semibold text-white">
-                    Modo mock listo para iterar.
-                  </h2>
-                  <p className="mt-3 text-sm leading-6 text-slate-300">
-                    Por ahora la lógica corre localmente con reglas compartidas. Cuando tengas la
-                    API de Supabase, este mismo formato puede guardarse sin rehacer la interfaz.
-                  </p>
-                </div>
-
-                <div className="grid gap-3 rounded-3xl border border-white/10 bg-white/5 p-5">
-                  <div className="flex items-center justify-between text-sm text-slate-300">
-                    <span>Estado</span>
-                    <span className="font-semibold text-emerald-200">Activo</span>
-                  </div>
-                  <div className="flex items-center justify-between text-sm text-slate-300">
-                    <span>Fuente</span>
-                    <span className="font-semibold text-white">Entrada libre</span>
-                  </div>
-                  <div className="flex items-center justify-between text-sm text-slate-300">
-                    <span>Persistencia</span>
-                    <span className="font-semibold text-white">Supabase despues</span>
-                  </div>
-                </div>
-              </div>
-            </aside>
+            <nav className="hidden lg:flex items-center gap-6">
+              <Link className="text-label-lg font-label-lg text-primary font-bold border-b-2 border-primary pb-1" href="/">
+                Inicio
+              </Link>
+              <Link className="text-label-lg font-label-lg text-on-surface-variant hover:text-primary transition-colors pb-1" href="/iniciativas">
+                Explorar
+              </Link>
+              <Link className="text-label-lg font-label-lg text-on-surface-variant hover:text-primary transition-colors pb-1" href="/dashboard">
+                Comunidad
+              </Link>
+              <Link className="text-label-lg font-label-lg text-on-surface-variant hover:text-primary transition-colors pb-1" href="/about">
+                Sobre Nosotros
+              </Link>
+            </nav>
           </div>
-        </section>
+          <div className="flex items-center gap-3">
+            <Link className="px-4 py-2 text-label-lg font-label-lg font-bold text-primary hover:bg-surface-variant/50 rounded-xl transition-colors" href="/login">
+              Iniciar Sesión
+            </Link>
+            <Link className="px-4 py-2 bg-primary text-on-primary text-label-lg font-label-lg font-bold rounded-xl hover:opacity-90 transition-opacity shadow-sm" href="/org-panel/nueva-iniciativa">
+              Regístrate
+            </Link>
+          </div>
+        </header>
 
-        <section className="grid gap-6 lg:grid-cols-[1fr_0.95fr]">
-          <div className="rounded-[2rem] border border-white/10 bg-white/5 p-6 shadow-xl shadow-black/20 backdrop-blur-xl sm:p-8">
-            <div className="flex items-center justify-between gap-4">
-              <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.18em] text-sky-200">
-                  Idea original
-                </p>
-                <h2 className="mt-2 text-2xl font-semibold text-white">
-                  Escribe una iniciativa en texto natural.
-                </h2>
-              </div>
-              <button
-                type="button"
-                onClick={() => setIdea(DEFAULT_IDEA)}
-                className="rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-medium text-white transition hover:bg-white/15"
-              >
-                Cargar ejemplo
-              </button>
-            </div>
-
-            <label className="mt-6 block">
-              <span className="mb-3 block text-sm font-medium text-slate-200">
-                Descripcion de la propuesta
-              </span>
-              <textarea
-                value={idea}
-                onChange={(event) => setIdea(event.target.value)}
-                rows={11}
-                className="min-h-[280px] w-full rounded-3xl border border-white/10 bg-slate-950/60 p-5 text-base leading-7 text-white outline-none transition placeholder:text-slate-500 focus:border-emerald-300/70 focus:ring-2 focus:ring-emerald-300/20"
-                placeholder="Ejemplo: Queremos organizar una red de tutorias, limpieza del barrio o talleres de salud..."
+        <main className="flex-grow p-container-padding flex flex-col gap-bento-gap max-w-7xl mx-auto w-full">
+          <section className="w-full rounded-[24px] overflow-hidden relative min-h-[500px] flex items-center shadow-sm">
+            <div className="absolute inset-0 z-0">
+              <img
+                alt="Team collaboration"
+                className="w-full h-full object-cover object-center"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuByfoA4BLhNph-tkOWrCRZoY8FCAR6y2thz5VVohq_KysHc70iHkzHAT2N-HfNbPepXa3fmWkIr5s_YXrYj7QpTvTx0Q_tfYVrlo6T-F3KCHCiTqRQLjGVCvnLq_rYzayCc5MtZ6sjZqKdM_jpF2ERN4ZdvMpnGR9DwZOOwyAAbfeT2XOJQOQNeyVisda7jQeHdM19RZfh1Q2lShN36ulcND5IX32JfCEFBGGUbSmz7Qhw7SsEYEGNnP3UDA1F6GBct_MQKG8tT7sk"
               />
-            </label>
-            <p className="mt-4 text-sm leading-6 text-slate-400">
-              La tarjeta de la derecha se actualiza en tiempo real con una sintesis tipo IA.
-            </p>
-          </div>
-
-          <div className="rounded-[2rem] border border-emerald-300/20 bg-slate-950/60 p-6 shadow-xl shadow-black/25 backdrop-blur-xl sm:p-8">
-            <div className="flex items-center justify-between gap-4">
-              <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.18em] text-emerald-200">
-                  Sintesis generada
-                </p>
-                <h2 className="mt-2 text-2xl font-semibold text-white">Ficha estructurada</h2>
+              <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/70 to-transparent" />
+            </div>
+            <div className="relative z-10 p-8 md:p-16 max-w-3xl">
+              <h1 className="text-headline-lg-mobile md:text-display-lg font-headline-lg-mobile md:font-display-lg text-on-primary mb-6 drop-shadow-md">
+                Transforma tu comunidad con LánZate
+              </h1>
+              <p className="text-body-lg font-body-lg text-on-primary/90 mb-8 max-w-2xl text-xl">
+                Descubre, idea y lanza proyectos innovadores que generan un impacto real. Únete a una comunidad de agentes de cambio, desarrolla tus habilidades y haz realidad tus iniciativas.
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <Link className="bg-secondary hover:bg-secondary/90 text-on-secondary px-8 py-4 rounded-xl text-title-lg font-title-lg font-bold shadow-lg transition-transform hover:-translate-y-1" href="/org-panel/nueva-iniciativa">
+                  Empieza a Crear
+                </Link>
+                <Link className="border-2 border-on-primary text-on-primary hover:bg-on-primary/10 px-8 py-4 rounded-xl text-title-lg font-title-lg font-bold shadow-lg transition-all" href="/iniciativas">
+                  Descubre Iniciativas
+                </Link>
               </div>
-              <span className="rounded-full border border-emerald-300/20 bg-emerald-300/10 px-3 py-1 text-xs font-semibold text-emerald-100">
-                {draft.category}
-              </span>
             </div>
+          </section>
 
-            <div className="mt-6 grid gap-4">
-              <article className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
-                  Titulo
-                </p>
-                <h3 className="mt-2 text-xl font-semibold text-white">{draft.title}</h3>
-              </article>
+          <section className="grid grid-cols-1 md:grid-cols-3 gap-bento-gap">
+            <div className="bg-surface-container-lowest rounded-[24px] p-8 shadow-sm border border-surface-variant/30 flex flex-col hover:-translate-y-1 transition-transform group">
+              <div className="w-14 h-14 bg-tertiary-container text-on-tertiary-container rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <span className="material-symbols-outlined text-3xl">public</span>
+              </div>
+              <h3 className="text-title-lg font-title-lg text-on-surface mb-4">Impacto Social Real</h3>
+              <p className="text-body-lg font-body-lg text-on-surface-variant">Conecta tus ideas con los desafíos más apremiantes de tu comunidad. Nuestra plataforma facilita la creación de soluciones sostenibles y medibles.</p>
+            </div>
+            <div className="bg-surface-container-lowest rounded-[24px] p-8 shadow-sm border border-surface-variant/30 flex flex-col hover:-translate-y-1 transition-transform group md:col-span-2 relative overflow-hidden">
+              <div className="absolute right-0 bottom-0 opacity-10 pointer-events-none transform translate-x-1/4 translate-y-1/4">
+                <span className="material-symbols-outlined text-[200px]">military_tech</span>
+              </div>
+              <div className="w-14 h-14 bg-secondary-container text-on-secondary-container rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform relative z-10">
+                <span className="material-symbols-outlined text-3xl">stars</span>
+              </div>
+              <h3 className="text-title-lg font-title-lg text-on-surface mb-4 relative z-10">Sube de Nivel</h3>
+              <p className="text-body-lg font-body-lg text-on-surface-variant max-w-xl relative z-10">Participa activamente, gana experiencia y desbloquea recompensas. Nuestro sistema gamificado reconoce tu esfuerzo y te motiva a alcanzar nuevas metas de impacto.</p>
+            </div>
+            <div className="bg-surface-container-lowest rounded-[24px] p-8 shadow-sm border border-surface-variant/30 flex flex-col hover:-translate-y-1 transition-transform group md:col-span-2 relative overflow-hidden bg-gradient-to-br from-surface-container-lowest to-primary-fixed/20">
+              <div className="absolute right-0 bottom-0 opacity-10 pointer-events-none transform translate-x-1/4 translate-y-1/4 text-primary">
+                <span className="material-symbols-outlined text-[200px]">psychology</span>
+              </div>
+              <div className="w-14 h-14 bg-primary text-on-primary rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform relative z-10">
+                <span className="material-symbols-outlined text-3xl">auto_awesome</span>
+              </div>
+              <h3 className="text-title-lg font-title-lg text-on-surface mb-4 relative z-10">Potenciado por IA</h3>
+              <p className="text-body-lg font-body-lg text-on-surface-variant max-w-xl relative z-10">¿Atascado? Utiliza nuestras herramientas de Inteligencia Artificial para generar ideas, estructurar proyectos y encontrar las mejores estrategias para tu iniciativa.</p>
+            </div>
+            <div className="bg-surface-container-lowest rounded-[24px] p-8 shadow-sm border border-surface-variant/30 flex flex-col hover:-translate-y-1 transition-transform group">
+              <div className="w-14 h-14 bg-surface-variant text-on-surface-variant rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <span className="material-symbols-outlined text-3xl">groups</span>
+              </div>
+              <h3 className="text-title-lg font-title-lg text-on-surface mb-4">Comunidad Activa</h3>
+              <p className="text-body-lg font-body-lg text-on-surface-variant">Encuentra co-fundadores, mentores y voluntarios. LánZate es tu red para construir equipos sólidos y multidisciplinarios.</p>
+            </div>
+          </section>
 
-              <article className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
-                  Objetivo / resumen
-                </p>
-                <p className="mt-2 text-sm leading-7 text-slate-200">{draft.summary}</p>
-              </article>
+          <section className="w-full bg-primary rounded-[24px] p-10 md:p-16 flex flex-col md:flex-row items-center justify-between shadow-lg mt-8">
+            <div className="mb-8 md:mb-0 md:mr-8">
+              <h2 className="text-headline-lg font-headline-lg text-on-primary mb-4">¿Listo para hacer la diferencia?</h2>
+              <p className="text-body-lg font-body-lg text-on-primary/80">Únete a miles de ciudadanos que ya están transformando su entorno con LánZate.</p>
+            </div>
+            <Link className="bg-secondary hover:bg-secondary/90 text-on-secondary px-8 py-4 rounded-xl text-title-lg font-title-lg font-bold shadow-sm whitespace-nowrap transition-transform hover:-translate-y-1" href="/org-panel/nueva-iniciativa">
+              Crear mi Cuenta Gratis
+            </Link>
+          </section>
+        </main>
 
-              <article className="grid gap-4 sm:grid-cols-2">
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
-                    Publico
-                  </p>
-                  <p className="mt-2 text-sm leading-6 text-slate-200">{draft.audience}</p>
-                </div>
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
-                    Tiempo estimado
-                  </p>
-                  <p className="mt-2 text-sm leading-6 text-slate-200">{draft.estimatedTime}</p>
-                </div>
-              </article>
-
-              <article className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
-                  Problema que resuelve
-                </p>
-                <p className="mt-2 text-sm leading-7 text-slate-200">{draft.problem}</p>
-              </article>
-
-              <article className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
-                  Actividades sugeridas
-                </p>
-                <ul className="mt-3 space-y-2 text-sm leading-6 text-slate-200">
-                  {draft.activities.map((activity) => (
-                    <li key={activity} className="flex gap-3">
-                      <span className="mt-2 h-2 w-2 rounded-full bg-emerald-300" />
-                      <span>{activity}</span>
-                    </li>
-                  ))}
-                </ul>
-              </article>
-
-              <article className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
-                  Requisitos e impacto
-                </p>
-                <div className="mt-3 grid gap-4 sm:grid-cols-2">
-                  <div>
-                    <p className="text-sm font-semibold text-white">Requisitos</p>
-                    <ul className="mt-2 space-y-2 text-sm leading-6 text-slate-200">
-                      {draft.requirements.map((requirement) => (
-                        <li key={requirement} className="flex gap-3">
-                          <span className="mt-2 h-2 w-2 rounded-full bg-sky-300" />
-                          <span>{requirement}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div>
-                    <p className="text-sm font-semibold text-white">Impacto esperado</p>
-                    <ul className="mt-2 space-y-2 text-sm leading-6 text-slate-200">
-                      {draft.impact.map((item) => (
-                        <li key={item} className="flex gap-3">
-                          <span className="mt-2 h-2 w-2 rounded-full bg-amber-300" />
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </article>
+        <footer className="w-full mt-auto bg-surface-container dark:bg-surface-container-highest border-t border-surface-variant/50 flex flex-col md:flex-row justify-between items-center px-container-padding py-8 text-body-md font-body-md text-on-surface-variant">
+          <div className="mb-4 md:mb-0 text-center md:text-left flex items-center gap-3">
+            <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-on-primary">
+              <span className="material-symbols-outlined text-[16px]">lightbulb</span>
+            </div>
+            <div>
+              <span className="text-label-lg font-label-lg font-bold text-primary block">LánZate</span>
+              © 2024 LánZate - Plataforma de Participación Ciudadana
             </div>
           </div>
-        </section>
+          <div className="flex gap-6">
+            <Link className="text-on-surface-variant hover:text-primary transition-colors" href="/legal">
+              Aviso Legal
+            </Link>
+            <Link className="text-on-surface-variant hover:text-primary transition-colors" href="/privacidad">
+              Privacidad
+            </Link>
+            <Link className="text-on-surface-variant hover:text-primary transition-colors" href="/terminos">
+              Términos
+            </Link>
+          </div>
+        </footer>
       </div>
-    </main>
+    </div>
   );
 }
