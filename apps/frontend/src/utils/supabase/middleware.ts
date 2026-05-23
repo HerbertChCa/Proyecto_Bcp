@@ -39,8 +39,12 @@ export async function updateSession(request: NextRequest) {
   } = await supabase.auth.getUser();
 
   const isOrgPanel = request.nextUrl.pathname.startsWith('/org-panel');
+  const isDashboard = request.nextUrl.pathname.startsWith('/dashboard');
+  const isIdeas = request.nextUrl.pathname.startsWith('/ideas');
   
-  if (isOrgPanel) {
+  const requiresAuth = isOrgPanel || isDashboard || isIdeas;
+
+  if (requiresAuth) {
     if (!user) {
       const redirectUrl = request.nextUrl.clone();
       redirectUrl.pathname = '/login';
@@ -51,7 +55,9 @@ export async function updateSession(request: NextRequest) {
       });
       return redirectRes;
     }
+  }
     
+  if (isOrgPanel) {
     const userMetadata = user.user_metadata || {};
     const isOrg = Boolean(
       userMetadata.organization_verified ||

@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { logoutAction } from '../app/login/actions';
 import type { ReactNode } from 'react';
 
 type NavItem = {
@@ -40,14 +41,8 @@ export function AppShell({
       {/* ── Sidebar ── */}
       <aside className="fixed left-0 top-0 hidden h-full w-60 flex-col bg-surface-container-lowest border-r border-outline-variant/20 px-4 py-6 md:flex shadow-sm">
         {/* Logo */}
-        <div className="mb-8 flex items-center gap-3 px-2">
-          <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-primary text-on-primary shadow-sm shrink-0">
-            <span className="material-symbols-outlined text-[20px]">rocket_launch</span>
-          </div>
-          <div>
-            <p className="text-title-lg font-title-lg font-bold text-primary leading-tight">LánZate</p>
-            <p className="text-label-md font-label-md text-on-surface-variant leading-tight">Participación Ciudadana</p>
-          </div>
+        <div className="mb-8 flex w-full items-center justify-center">
+          <img src="/logo.png" alt="LánZate Logo" className="h-20 w-auto object-contain" />
         </div>
 
         {/* Nav items */}
@@ -78,12 +73,18 @@ export function AppShell({
 
         {/* CTA – Participar */}
         <Link
-          className="mt-auto inline-flex items-center justify-center gap-2 rounded-2xl bg-secondary px-4 py-3 text-label-lg font-label-lg font-semibold text-on-secondary shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md"
+          className="mt-auto flex w-full items-center justify-center gap-2 rounded-2xl bg-secondary px-4 py-3 text-label-lg font-label-lg font-semibold text-on-secondary shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md"
           href="/org-panel/nueva-iniciativa"
         >
           <span className="material-symbols-outlined text-[18px]">add</span>
           Participar
         </Link>
+        <form action={logoutAction} className="mt-2 w-full">
+          <button type="submit" className="flex w-full items-center justify-center gap-2 rounded-2xl border border-outline-variant/30 bg-surface-container px-4 py-3 text-label-lg font-label-lg font-semibold text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface">
+            <span className="material-symbols-outlined text-[18px]">logout</span>
+            Salir
+          </button>
+        </form>
       </aside>
 
       {/* ── Main content ── */}
@@ -92,8 +93,8 @@ export function AppShell({
         <header className="sticky top-0 z-30 border-b border-outline-variant/20 bg-surface/90 backdrop-blur-md">
           <div className="flex items-center justify-between gap-4 px-container-padding py-3">
             {/* Mobile logo */}
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-on-primary md:hidden shrink-0">
-              <span className="material-symbols-outlined text-[18px]">rocket_launch</span>
+            <div className="flex-1 md:hidden flex justify-center">
+              <img src="/logo.png" alt="LánZate Logo" className="h-10 w-auto object-contain" />
             </div>
 
             {/* Search */}

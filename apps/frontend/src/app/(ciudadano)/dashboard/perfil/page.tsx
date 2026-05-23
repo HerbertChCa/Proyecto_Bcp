@@ -1,4 +1,15 @@
-export default function ProfilePage() {
+import Link from 'next/link';
+import { createSupabaseServerClient } from '../../../../utils/supabase/server';
+
+export default async function ProfilePage() {
+  const supabase = await createSupabaseServerClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  const userMetadata = user?.user_metadata || {};
+  const fullName = userMetadata.full_name || 'Estudiante';
+  const role = userMetadata.role === 'org' ? 'Organización' : 'Estudiante';
+  const region = userMetadata.region || 'Campus Principal';
+  const initials = fullName.substring(0, 2).toUpperCase();
+
   return (
     <div>
       {/* Profile header */}
@@ -6,7 +17,7 @@ export default function ProfilePage() {
         <div className="flex flex-col gap-8 lg:flex-row lg:items-center">
           <div className="relative shrink-0">
             <div className="flex h-32 w-32 items-center justify-center rounded-full border-4 border-surface-container-lowest bg-primary-container text-display-lg font-bold text-on-primary-container shadow-md">
-              CM
+              {initials}
             </div>
             <div className="absolute -bottom-2 -right-2 flex h-10 w-10 items-center justify-center rounded-full border-2 border-surface-container-lowest bg-secondary text-on-secondary shadow-sm">
               <span className="material-symbols-outlined text-[20px]">star</span>
@@ -16,8 +27,8 @@ export default function ProfilePage() {
             <div className="inline-flex rounded-full bg-tertiary-container px-3 py-1 text-label-md font-label-md text-on-tertiary-container">
               Rango: Ciudadano Activo
             </div>
-            <h1 className="mt-4 text-headline-lg-mobile md:text-headline-lg font-headline-lg-mobile md:font-headline-lg text-primary">Carlos Mendoza</h1>
-            <p className="mt-2 text-body-md text-on-surface-variant">Estudiante de Arquitectura • 1,450 pts de impacto</p>
+            <h1 className="mt-4 text-headline-lg-mobile md:text-headline-lg font-headline-lg-mobile md:font-headline-lg text-primary">{fullName}</h1>
+            <p className="mt-2 text-body-md text-on-surface-variant">{role} • {region} • 1,450 pts de impacto</p>
             <div className="mt-6 max-w-xl">
               <div className="mb-2 flex items-end justify-between">
                 <span className="text-label-lg font-label-lg text-primary">Progreso hacia Nivel 4</span>

@@ -6,14 +6,8 @@ export default function HomePage() {
 
       {/* ── Minimal header: logo + auth buttons only ── */}
       <header className="flex justify-between items-center w-full px-container-padding py-4 bg-surface/80 backdrop-blur-md shadow-sm sticky top-0 z-40">
-        <Link href="/" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 rounded-2xl bg-primary flex items-center justify-center text-on-primary shadow-sm group-hover:shadow-md transition-shadow">
-            <span className="material-symbols-outlined text-[20px]">rocket_launch</span>
-          </div>
-          <div>
-            <span className="text-title-lg font-title-lg font-bold text-primary block leading-tight">LánZate</span>
-            <span className="text-label-md font-label-md text-on-surface-variant leading-tight hidden sm:block">Participación Ciudadana</span>
-          </div>
+        <Link href="/" className="flex items-center gap-3 group hover:opacity-90 transition-opacity">
+          <img src="/logo.png" alt="LánZate Logo" className="h-20 w-auto object-contain" />
         </Link>
 
         <div className="flex items-center gap-3">
@@ -126,11 +120,8 @@ export default function HomePage() {
 
       <footer className="w-full mt-auto bg-surface-container border-t border-outline-variant/30 flex flex-col md:flex-row justify-between items-center px-container-padding py-8 text-body-md font-body-md text-on-surface-variant">
         <div className="mb-4 md:mb-0 text-center md:text-left flex items-center gap-3">
-          <div className="w-8 h-8 rounded-xl bg-primary flex items-center justify-center text-on-primary">
-            <span className="material-symbols-outlined text-[16px]">rocket_launch</span>
-          </div>
-          <div>
-            <span className="text-label-lg font-label-lg font-bold text-primary block">LánZate</span>
+          <img src="/logo.png" alt="LánZate Logo" className="h-12 w-auto object-contain grayscale opacity-70" />
+          <div className="text-left">
             © 2024 LánZate - Plataforma de Participación Ciudadana
           </div>
         </div>

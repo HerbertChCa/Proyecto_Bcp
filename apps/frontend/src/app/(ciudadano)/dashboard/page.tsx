@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { createSupabaseServerClient } from '../../../utils/supabase/server';
 
 const opportunities = [
   {
@@ -36,7 +37,15 @@ const highlights = [
   { label: 'Créditos acumulados', value: '150', detail: 'canjeables en recompensas' },
 ];
 
-export default function DashboardPage() {
+export default async function DashboardPage() {
+  const supabase = await createSupabaseServerClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  
+  const userMetadata = user?.user_metadata || {};
+  const fullName = userMetadata.full_name || 'Estudiante';
+  const role = userMetadata.role === 'org' ? 'Organización' : 'Estudiante';
+  const initials = fullName.substring(0, 2).toUpperCase();
+
   return (
     <div className="space-y-bento-gap">
       {/* Header row */}
@@ -61,11 +70,11 @@ export default function DashboardPage() {
           </div>
           <div className="flex items-center gap-2 rounded-full border border-outline-variant/40 bg-surface-container px-3 py-2">
             <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary-container text-on-primary-container text-label-md font-bold">
-              JP
+              {initials}
             </div>
             <div className="hidden xl:block">
-              <p className="text-label-lg font-label-lg font-bold text-on-surface leading-tight">Juan Pérez</p>
-              <p className="text-label-md font-label-md text-on-surface-variant leading-tight">Estudiante</p>
+              <p className="text-label-lg font-label-lg font-bold text-on-surface leading-tight">{fullName}</p>
+              <p className="text-label-md font-label-md text-on-surface-variant leading-tight">{role}</p>
             </div>
           </div>
         </div>

@@ -29,14 +29,8 @@ export default function LoginPage() {
               <span className="material-symbols-outlined text-[18px]">arrow_back</span>
               Volver al inicio
             </Link>
-            <div className="mt-6 flex items-center gap-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 text-on-primary">
-                <span className="material-symbols-outlined">rocket_launch</span>
-              </div>
-              <div>
-                <p className="text-title-lg font-title-lg font-bold leading-tight">LánZate</p>
-                <p className="text-label-md font-label-md text-primary-fixed-dim leading-tight">Participación Ciudadana</p>
-              </div>
+            <div className="mt-6 flex bg-white/90 p-4 rounded-2xl w-fit">
+              <img src="/logo.png" alt="LánZate Logo" className="h-12 w-auto object-contain" />
             </div>
             <h1 className="mt-8 max-w-md text-display-lg font-display-lg leading-tight text-white">
               Entra al flujo de participación sin perder contexto.
@@ -221,6 +215,18 @@ export default function LoginPage() {
                     placeholder="••••••••"
                     className="w-full rounded-2xl border border-outline-variant bg-surface-container px-4 py-3 text-on-surface outline-none transition placeholder:text-on-surface-variant focus:border-primary focus:ring-2 focus:ring-primary/15"
                   />
+                </label>
+
+                <label className="flex items-center gap-3 rounded-2xl border border-outline-variant/50 bg-surface-container-lowest p-4 transition-colors hover:bg-surface-container cursor-pointer">
+                  <input
+                    type="checkbox"
+                    name="isOrg"
+                    className="h-5 w-5 rounded border-outline-variant text-primary focus:ring-primary"
+                  />
+                  <div>
+                    <span className="block text-label-lg font-label-lg text-on-surface">Soy una organización</span>
+                    <span className="block text-body-sm text-on-surface-variant">Quiero publicar iniciativas y buscar voluntarios.</span>
+                  </div>
                 </label>
 
                 <button

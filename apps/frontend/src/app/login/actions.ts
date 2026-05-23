@@ -27,6 +27,8 @@ export async function registerAction(formData: FormData) {
   const password = String(formData.get('password') || '');
   const confirmPassword = String(formData.get('confirmPassword') || '');
 
+  const isOrg = formData.get('isOrg') === 'on';
+
   if (!fullName || !email || !password) {
     redirect('/login?tab=register&error=Todos los campos son obligatorios');
   }
@@ -47,6 +49,7 @@ export async function registerAction(formData: FormData) {
       data: {
         full_name: fullName,
         region: 'general',
+        role: isOrg ? 'org' : 'general',
       },
     },
   });
@@ -55,5 +58,11 @@ export async function registerAction(formData: FormData) {
     redirect(`/login?tab=register&error=${encodeURIComponent(error.message)}`);
   }
 
-  redirect('/dashboard');
+  redirect(isOrg ? '/org-panel' : '/dashboard');
+}
+
+export async function logoutAction() {
+  const supabase = await createSupabaseServerClient();
+  await supabase.auth.signOut();
+  redirect('/login');
 }
