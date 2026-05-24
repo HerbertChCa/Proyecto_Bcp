@@ -2,10 +2,10 @@
 
 import { loginAction, registerAction } from './actions';
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 
-export default function LoginPage() {
+function LoginContent() {
   const searchParams = useSearchParams();
   const [activeTab, setActiveTab] = useState<'login' | 'register'>('login');
   const [error, setError] = useState<string | null>(null);
@@ -249,5 +249,19 @@ export default function LoginPage() {
         </section>
       </div>
     </main>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={
+      <main className="min-h-screen bg-[radial-gradient(circle_at_top,rgba(0,24,92,0.18),transparent_35%),linear-gradient(135deg,#00185c_0%,#0b1b4d_45%,#f7f9fb_45%,#f7f9fb_100%)] px-6 py-10 flex items-center justify-center text-white">
+        <div className="text-center">
+          <p className="text-title-lg font-title-lg font-bold">Cargando...</p>
+        </div>
+      </main>
+    }>
+      <LoginContent />
+    </Suspense>
   );
 }
