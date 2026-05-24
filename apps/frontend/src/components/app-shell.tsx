@@ -15,14 +15,23 @@ type AppShellProps = {
   searchPlaceholder?: string;
   headerMeta?: ReactNode;
   children: ReactNode;
+  userRole?: string;
 };
 
-const unifiedNavItems: NavItem[] = [
-  { href: '/dashboard', label: 'Dashboard', icon: 'dashboard' },
-  { href: '/dashboard/perfil', label: 'Perfil', icon: 'person' },
-  { href: '/ideas', label: 'Ideas', icon: 'lightbulb' },
-  { href: '/org-panel', label: 'Gestión', icon: 'settings' },
-];
+const getNavItems = (role: string): NavItem[] => {
+  const items: NavItem[] = [];
+
+  if (role === 'general') {
+    items.push({ href: '/dashboard', label: 'Dashboard', icon: 'dashboard' });
+    items.push({ href: '/ideas', label: 'Proponer Idea', icon: 'lightbulb' });
+    items.push({ href: '/dashboard/perfil', label: 'Perfil', icon: 'person' });
+  } else if (role === 'org') {
+    items.push({ href: '/org-panel', label: 'Panel Principal', icon: 'dashboard' });
+    items.push({ href: '/org-panel/ideas', label: 'Buzón de Ideas', icon: 'inbox' });
+  }
+
+  return items;
+};
 
 function isActivePath(pathname: string, href: string) {
   if (href === '/') return pathname === '/';
@@ -33,8 +42,10 @@ export function AppShell({
   searchPlaceholder = 'Buscar iniciativas, ideas o paneles...',
   headerMeta,
   children,
+  userRole = 'general',
 }: AppShellProps) {
   const pathname = usePathname();
+  const navItems = getNavItems(userRole);
 
   return (
     <div className="min-h-screen bg-background text-on-background">
@@ -47,7 +58,7 @@ export function AppShell({
 
         {/* Nav items */}
         <nav className="flex flex-1 flex-col gap-1">
-          {unifiedNavItems.map((item) => {
+          {navItems.map((item) => {
             const active = isActivePath(pathname, item.href);
             return (
               <Link
@@ -71,13 +82,13 @@ export function AppShell({
           })}
         </nav>
 
-        {/* CTA – Participar */}
+        {/* CTA – Participar / Proponer */}
         <Link
           className="mt-auto flex w-full items-center justify-center gap-2 rounded-2xl bg-secondary px-4 py-3 text-label-lg font-label-lg font-semibold text-on-secondary shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md"
-          href="/org-panel/nueva-iniciativa"
+          href={userRole === 'org' ? '/org-panel/nueva-iniciativa' : '/ideas'}
         >
           <span className="material-symbols-outlined text-[18px]">add</span>
-          Participar
+          {userRole === 'org' ? 'Nueva Iniciativa' : 'Proponer Idea'}
         </Link>
         <form action={logoutAction} className="mt-2 w-full">
           <button type="submit" className="flex w-full items-center justify-center gap-2 rounded-2xl border border-outline-variant/30 bg-surface-container px-4 py-3 text-label-lg font-label-lg font-semibold text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface">
@@ -124,7 +135,7 @@ export function AppShell({
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <p className="text-label-lg font-label-lg font-bold text-primary">LánZate</p>
-              <p className="mt-0.5 text-label-md font-label-md">© 2024 Plataforma de Participación Ciudadana</p>
+              <p className="mt-0.5 text-label-md font-label-md">© 2026 Plataforma de Participación Ciudadana</p>
             </div>
             <div className="flex flex-wrap gap-5 text-label-md font-label-md">
               <Link className="transition-colors hover:text-primary" href="/about">Sobre nosotros</Link>

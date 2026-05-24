@@ -27,6 +27,12 @@ export default async function InitiativePage({ params }: InitiativePageProps) {
 
   return (
     <div>
+      <div className="mb-6">
+        <Link href="/dashboard" className="inline-flex items-center gap-2 text-label-lg font-label-lg text-secondary hover:underline">
+          <span className="material-symbols-outlined text-[18px]">arrow_back</span>
+          Volver al Dashboard
+        </Link>
+      </div>
       <section className="overflow-hidden rounded-[28px] border border-surface-variant/30 bg-surface-container-lowest shadow-sm">
         <div className="relative h-[380px] overflow-hidden bg-surface-container-high">
           <img alt={initiative.title} className="absolute inset-0 h-full w-full object-cover" src={imageUrl} />

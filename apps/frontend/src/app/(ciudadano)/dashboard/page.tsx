@@ -111,7 +111,7 @@ export default async function DashboardPage() {
                   Explorar ahora
                 </Link>
                 <Link className="rounded-2xl border border-white/20 px-4 py-3 text-center text-label-lg font-label-lg font-bold text-white transition-colors hover:bg-white/10" href="/ideas">
-                  Ver ideas IA
+                  Proponer idea
                 </Link>
               </div>
             </div>
@@ -154,8 +154,8 @@ export default async function DashboardPage() {
                     <span className="material-symbols-outlined text-[18px]">group</span>
                     {opportunity.members}
                   </span>
-                  <Link className="rounded-xl bg-secondary px-4 py-2 text-label-lg font-label-lg font-bold text-on-secondary transition-transform hover:-translate-y-0.5" href="/org-panel/nueva-iniciativa">
-                    Unirme a la iniciativa
+                  <Link className="rounded-xl bg-secondary px-4 py-2 text-label-lg font-label-lg font-bold text-on-secondary transition-transform hover:-translate-y-0.5" href="/iniciativas">
+                    Ver detalles
                   </Link>
                 </div>
               </div>
@@ -192,14 +192,14 @@ export default async function DashboardPage() {
         <article className="rounded-[28px] border border-surface-variant/30 bg-primary p-6 text-on-primary shadow-sm md:p-8">
           <h2 className="text-title-lg font-title-lg">Atajo rápido</h2>
           <p className="mt-3 text-body-md text-primary-fixed-dim">
-            Si ya tienes una propuesta lista, publícala sin pasar por pantallas intermedias.
+            ¿Tienes una idea para mejorar tu comunidad? Envíala directamente a una organización.
           </p>
           <div className="mt-6 flex flex-col gap-3">
-            <Link className="rounded-2xl bg-secondary px-4 py-3 text-center text-label-lg font-label-lg font-bold text-on-secondary shadow-sm transition-transform hover:-translate-y-0.5" href="/org-panel/nueva-iniciativa">
-              Publicar iniciativa
+            <Link className="rounded-2xl bg-secondary px-4 py-3 text-center text-label-lg font-label-lg font-bold text-on-secondary shadow-sm transition-transform hover:-translate-y-0.5" href="/ideas">
+              Proponer una idea
             </Link>
-            <Link className="rounded-2xl border border-white/20 px-4 py-3 text-center text-label-lg font-label-lg font-bold text-white transition-colors hover:bg-white/10" href="/ideas">
-              Sintetizar una idea
+            <Link className="rounded-2xl border border-white/20 px-4 py-3 text-center text-label-lg font-label-lg font-bold text-white transition-colors hover:bg-white/10" href="/iniciativas">
+              Ver iniciativas activas
             </Link>
           </div>
         </article>

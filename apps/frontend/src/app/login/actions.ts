@@ -12,13 +12,14 @@ export async function loginAction(formData: FormData) {
   }
 
   const supabase = await createSupabaseServerClient();
-  const { error } = await supabase.auth.signInWithPassword({ email, password });
+  const { data, error } = await supabase.auth.signInWithPassword({ email, password });
 
-  if (error) {
-    redirect(`/login?error=${encodeURIComponent(error.message)}`);
+  if (error || !data.user) {
+    redirect(`/login?error=${encodeURIComponent(error?.message || 'Error en el inicio de sesión')}`);
   }
 
-  redirect('/dashboard');
+  const role = data.user.user_metadata?.role;
+  redirect(role === 'org' ? '/org-panel' : '/dashboard');
 }
 
 export async function registerAction(formData: FormData) {

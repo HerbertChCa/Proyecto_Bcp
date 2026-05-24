@@ -122,7 +122,7 @@ export default function HomePage() {
         <div className="mb-4 md:mb-0 text-center md:text-left flex items-center gap-3">
           <img src="/logo.png" alt="LánZate Logo" className="h-12 w-auto object-contain grayscale opacity-70" />
           <div className="text-left">
-            © 2024 LánZate - Plataforma de Participación Ciudadana
+            © 2026 LánZate - Plataforma de Participación Ciudadana
           </div>
         </div>
         <div className="flex gap-6">

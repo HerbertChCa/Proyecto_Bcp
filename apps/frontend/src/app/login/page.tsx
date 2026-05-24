@@ -42,9 +42,9 @@ export default function LoginPage() {
 
           <div className="mt-10 grid gap-4 sm:grid-cols-3">
             {[
-              ['dashboard', 'Dashboard', 'Seguimiento y recompensas'],
-              ['lightbulb', 'Ideas', 'Borradores y síntesis IA'],
-              ['settings', 'Gestión', 'Validación y publicación'],
+              ['dashboard', 'Dashboard', 'Tu panel personalizado'],
+              ['lightbulb', 'Propuestas', 'Envía y recibe ideas'],
+              ['auto_awesome', 'IA', 'Síntesis inteligente'],
             ].map(([icon, label, detail]) => (
               <article key={label} className="rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm">
                 <span className="material-symbols-outlined text-[20px] text-primary-fixed-dim mb-2 block">{icon}</span>

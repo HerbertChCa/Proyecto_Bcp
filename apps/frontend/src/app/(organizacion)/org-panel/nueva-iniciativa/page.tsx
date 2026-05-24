@@ -188,8 +188,8 @@ export default function NewInitiativePage() {
               <Link className="rounded-2xl bg-secondary px-4 py-3 text-label-lg font-label-lg font-bold text-on-secondary shadow-sm" href="/org-panel/validacion">
                 Ver validación
               </Link>
-              <Link className="rounded-2xl border border-white/20 px-4 py-3 text-label-lg font-label-lg font-bold text-white" href="/ideas">
-                Ir a ideas
+              <Link className="rounded-2xl border border-white/20 px-4 py-3 text-label-lg font-label-lg font-bold text-white" href="/org-panel/ideas">
+                Ir al buzón de ideas
               </Link>
             </div>
           </section>

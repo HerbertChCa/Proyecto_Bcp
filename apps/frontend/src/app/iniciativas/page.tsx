@@ -29,9 +29,6 @@ export default async function InitiativesPage() {
           <h1 className="mt-2 text-headline-lg font-headline-lg text-primary">Catálogo de iniciativas activas</h1>
           <p className="mt-3 max-w-2xl text-body-lg font-body-lg text-on-surface-variant">Explora propuestas abiertas y entra directamente al detalle de cada iniciativa.</p>
         </div>
-        <Link className="rounded-2xl bg-primary px-5 py-3 text-label-lg font-label-lg font-bold text-on-primary transition-all hover:-translate-y-0.5 hover:shadow-md whitespace-nowrap" href="/org-panel/nueva-iniciativa">
-          Publicar iniciativa
-        </Link>
       </div>
 
       {items.length === 0 ? (
