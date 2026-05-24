@@ -41,7 +41,7 @@ export async function updateSession(request: NextRequest) {
   const isOrgPanel = request.nextUrl.pathname.startsWith('/org-panel');
   const isDashboard = request.nextUrl.pathname.startsWith('/dashboard');
   const isIdeas = request.nextUrl.pathname.startsWith('/ideas');
-  
+
   const requiresAuth = isOrgPanel || isDashboard || isIdeas;
 
   if (requiresAuth) {
@@ -49,30 +49,39 @@ export async function updateSession(request: NextRequest) {
       const redirectUrl = request.nextUrl.clone();
       redirectUrl.pathname = '/login';
       const redirectRes = NextResponse.redirect(redirectUrl);
-      
+
       response.cookies.getAll().forEach(cookie => {
         redirectRes.cookies.set(cookie.name, cookie.value);
       });
       return redirectRes;
     }
-  }
-    
-  if (isOrgPanel) {
-    const userMetadata = user.user_metadata || {};
+
+    const userMetadata = user?.user_metadata || {};
     const isOrg = Boolean(
       userMetadata.organization_verified ||
       userMetadata.is_verified_organization ||
       userMetadata.verified_organization ||
       userMetadata.organization_status === 'verified' ||
-      userMetadata.role === 'org' || 
+      userMetadata.role === 'org' ||
       userMetadata.role === 'organization'
     );
-    
-    if (!isOrg) {
+
+    if (isOrg && (isDashboard || isIdeas)) {
+      const redirectUrl = request.nextUrl.clone();
+      redirectUrl.pathname = '/org-panel';
+      const redirectRes = NextResponse.redirect(redirectUrl);
+
+      response.cookies.getAll().forEach(cookie => {
+        redirectRes.cookies.set(cookie.name, cookie.value);
+      });
+      return redirectRes;
+    }
+
+    if (!isOrg && isOrgPanel) {
       const redirectUrl = request.nextUrl.clone();
       redirectUrl.pathname = '/dashboard';
       const redirectRes = NextResponse.redirect(redirectUrl);
-      
+
       response.cookies.getAll().forEach(cookie => {
         redirectRes.cookies.set(cookie.name, cookie.value);
       });
